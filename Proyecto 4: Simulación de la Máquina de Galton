@@ -1,0 +1,25 @@
+import numpy as np
+import matplotlib.pyplot as plt
+
+def galton_machine(rows, balls):
+    bins = rows + 1
+    results = np.zeros(bins)
+
+    for _ in range(balls):
+        position = 0
+        for _ in range(rows):
+            if np.random.rand() < 0.5:
+                position += 1
+        results[position] += 1
+
+    return results
+
+def plot_galton_machine(rows, balls):
+    results = galton_machine(rows, balls)
+    plt.bar(range(len(results)), results)
+    plt.title(f"Distribución de bolas en la Máquina de Galton ({rows} niveles, {balls} canicas)")
+    plt.xlabel("Compartimentos")
+    plt.ylabel("Número de canicas")
+    plt.show()
+
+plot_galton_machine(12, 3000)
